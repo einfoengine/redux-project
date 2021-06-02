@@ -1,12 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import ProductComponent from './ProductComponent'
 
 
 const ProductListing = () => {
+    const products = useSelector(state => state);
+    // console.log(products);
     return (
-        <div>
-            <h1>Product Listing</h1>
+        <div className="ui grid container">
+            <ProductComponent/>
         </div>
     );
 }
 
 export default ProductListing;
+
+// Steps
+/* 
+1. Fetch products from product store
+- useSelector that takes state param and return state
+*/
