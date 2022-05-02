@@ -1,17 +1,20 @@
 import React, {useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import {setProducts} from '../redux/actions/productsActions';
 
-import ProductComponent from './ProductComponent'
+import ProductComponent from './ProductComponent';
 
 
 const ProductListing = () => {
     const products = useSelector(state => state);
+    const dispatch = useDispatch();
     // console.log(products);
     
     const fetchProducts = async () =>{
-        const res = await axios.get("https://fakestoreapi.com/products").catch(err => console.log("Axios error: fetch time error",err));
-        console.log(res.data);
+        const response = await axios.get("https://fakestoreapi.com/products").catch(err => console.log("Axios error: fetch time error",err));
+        console.log(response.data);
+        dispatch(setProducts(response.data));
     }
     useEffect(()=>{fetchProducts()},[]);
     return (
